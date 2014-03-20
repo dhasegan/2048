@@ -42,11 +42,19 @@ GameManager.prototype.setup = function () {
   this.won         = false;
   this.keepPlaying = false;
 
+  // Set the urls of the 11 levels
+  this.shuffleTileImages();
+
   // Add the initial tiles
   this.addStartTiles();
 
   // Update the actuator
   this.actuate();
+};
+
+// Set up the tiles urls for all the levels
+GameManager.prototype.shuffleTileImages = function () {
+  ALL_IDS = shuffleArray(ALL_IDS);
 };
 
 // Set up the initial tiles to start the game with
@@ -60,7 +68,7 @@ GameManager.prototype.addStartTiles = function () {
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
     var value = Math.random() < 0.9 ? 2 : 4;
-    var tile = new Tile(this.grid.randomAvailableCell(), value);
+    var tile = new Tile(this.grid.randomAvailableCell(), value, getLink(value));
 
     this.grid.insertTile(tile);
   }
@@ -127,7 +135,7 @@ GameManager.prototype.move = function (direction) {
 
         // Only one merger per row traversal?
         if (next && next.value === tile.value && !next.mergedFrom) {
-          var merged = new Tile(positions.next, tile.value * 2);
+          var merged = new Tile(positions.next, tile.value * 2, getLink(tile.value * 2));
           merged.mergedFrom = [tile, next];
 
           self.grid.insertTile(merged);

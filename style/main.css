@@ -2,7 +2,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #faf8ef;
+  background: #C4D2D9;
   color: #776e65;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px; }
@@ -232,7 +232,7 @@ hr {
   z-index: 2; }
 
 .tile, .tile .tile-inner {
-  width: 107px;
+  width: 84px;
   height: 107px;
   line-height: 116.25px; }
 .tile.tile-position-1-1 {
