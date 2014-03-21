@@ -3,6 +3,7 @@ function GameManager(size, InputManager, Actuator, ScoreManager) {
   this.inputManager = new InputManager;
   this.scoreManager = new ScoreManager;
   this.actuator     = new Actuator;
+  this.winningTile  = 2584;
 
   this.startTiles   = 2;
 
@@ -54,7 +55,8 @@ GameManager.prototype.setup = function () {
 
 // Set up the tiles urls for all the levels
 GameManager.prototype.shuffleTileImages = function () {
-  ALL_IDS = shuffleArray(ALL_IDS);
+  IDS_GUYS = shuffleArray(IDS_GUYS);
+  IDS_GIRLS = shuffleArray(IDS_GIRLS);
 };
 
 // Set up the initial tiles to start the game with
@@ -67,7 +69,7 @@ GameManager.prototype.addStartTiles = function () {
 // Adds a tile in a random position
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
-    var value = Math.random() < 0.9 ? 2 : 4;
+    var value = Math.random() < 0.95 ? 1 : 2;
     var tile = new Tile(this.grid.randomAvailableCell(), value, getLink(value));
 
     this.grid.insertTile(tile);
@@ -134,8 +136,9 @@ GameManager.prototype.move = function (direction) {
         var next      = self.grid.cellContent(positions.next);
 
         // Only one merger per row traversal?
-        if (next && next.value === tile.value && !next.mergedFrom) {
-          var merged = new Tile(positions.next, tile.value * 2, getLink(tile.value * 2));
+        if (next && self.shouldJoinTiles(next.value, tile.value) && !next.mergedFrom) {
+          var newValue = next.value + tile.value;
+          var merged = new Tile(positions.next, newValue, getLink(newValue));
           merged.mergedFrom = [tile, next];
 
           self.grid.insertTile(merged);
@@ -147,8 +150,8 @@ GameManager.prototype.move = function (direction) {
           // Update the score
           self.score += merged.value;
 
-          // The mighty 2048 tile
-          if (merged.value === 2048) self.won = true;
+          // The mighty 2048 or 2584 tile
+          if (merged.value === self.winningTile) self.won = true;
         } else {
           self.moveTile(tile, positions.farthest);
         }
@@ -170,6 +173,12 @@ GameManager.prototype.move = function (direction) {
     this.actuate();
   }
 };
+
+GameManager.prototype.shouldJoinTiles = function(value1, value2) {
+  // return value1 === value2; OLD GAME condition
+  return (isFibonacci(value1) && isFibonacci(value2) &&
+    consecutiveFibonacciItems(value1, value2));
+}
 
 // Get the vector representing the chosen direction
 GameManager.prototype.getVector = function (direction) {

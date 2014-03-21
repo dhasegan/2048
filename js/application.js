@@ -5,7 +5,7 @@ window.requestAnimationFrame(function () {
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-47727668-2', 'jacobs-university.de');
+  ga('create', 'UA-47727668-3', 'jacobs-university.de');
   ga('send', 'pageview');
 
   new GameManager(4, KeyboardInputManager, HTMLActuator, LocalScoreManager);
