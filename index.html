@@ -14,6 +14,15 @@
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
   <div class="container">
     <div class="heading">
       <h1 class="title">j2048</h1>
@@ -70,9 +79,25 @@
     </p>
     <hr>
     <p>
-    <a href="http://j2584.user.jacobs-university.de/" target="_blank"> j2584 </a>
-    <br>
-    <a href="https://whoisjack.herokuapp.com" target="_blank"> Who Is Jack? </a>
+    
+      <div class="share-btns">
+        <div class="fb-share-button" data-href="http://j2048.user.jacobs-university.de/" data-type="button_count"></div>
+
+        
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://j2048.user.jacobs-university.de/" data-text="Check out the Jacobs 2048 version" data-via="DanielHasegan" data-hashtags="j2048">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  
+
+        <div class="br-space">
+          and play: 
+          <span class="adv-link">
+            <a href="http://j2584.user.jacobs-university.de" target="_blank"> j2584 </a> 
+          </span>
+          <span class="adv-link">
+            <a href="https://whoisjack.herokuapp.com" target="_blank"> Who Is Jack? </a>
+          </span>
+        </div>
+      </div>
     </p>
     <hr>
     <p>
