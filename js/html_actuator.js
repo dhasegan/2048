@@ -65,7 +65,6 @@ HTMLActuator.prototype.addTile = function (tile) {
   // inner.textContent = tile.value;
   inner.src = tile.link;
   inner.alt = tile.value;
-  debugger
 
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first
